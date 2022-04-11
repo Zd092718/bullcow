@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"name": "BullCowGame",
+			"path": "."
+		},
+		{
+			"name": "UE4",
+			"path": "C:\\Program Files\\Epic Games\\UE_4.27"
+		}
+	],
+	"settings": {
+		"typescript.tsc.autoDetect": "off",
+		"C_Cpp.default.forcedInclude": [
+			"${default}",
+			"C:\\Users\\zdowd\\UnrealGames\\BullCowGame-starter-kit\\Intermediate\\Build\\Win64\\UE4Editor\\Development\\BullCowGame\\Definitions.BullCowGame.h",
+			"C:\\Users\\zdowd\\UnrealGames\\BullCowGame-starter-kit\\Intermediate\\Build\\Win64\\BullCowGameEditor\\Development\\Engine\\SharedPCH.Engine.h"
+		]
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools",
+			"ms-dotnettools.csharp"
+		]
+	}
+}
