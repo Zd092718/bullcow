@@ -13,8 +13,8 @@
 		"typescript.tsc.autoDetect": "off",
 		"C_Cpp.default.forcedInclude": [
 			"${default}",
-			"C:\\Users\\zdowd\\UnrealGames\\BullCowGame-starter-kit\\Intermediate\\Build\\Win64\\UE4Editor\\Development\\BullCowGame\\Definitions.BullCowGame.h",
-			"C:\\Users\\zdowd\\UnrealGames\\BullCowGame-starter-kit\\Intermediate\\Build\\Win64\\BullCowGameEditor\\Development\\Engine\\SharedPCH.Engine.h"
+			"C:\\Users\\zdowd\\UnrealGames\\BullCowGame-starter-kit 4.27\\Intermediate\\Build\\Win64\\UE4Editor\\Development\\BullCowGame\\Definitions.BullCowGame.h",
+			"C:\\Users\\zdowd\\UnrealGames\\BullCowGame-starter-kit 4.27\\Intermediate\\Build\\Win64\\BullCowGameEditor\\Development\\Engine\\SharedPCH.Engine.h"
 		]
 	},
 	"extensions": {
