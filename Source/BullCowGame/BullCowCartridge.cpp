@@ -13,10 +13,6 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 
     GetValidWords(Words);
     InitGame(); // setting up game
-
-    // PrintLine(TEXT("The number of valid words is: %i."), GetValidWords(Words).Num());
-    // PrintLine(TEXT("The number of possible words is %i"), Words.Num());
-    // PrintLine(TEXT("Valid words - 1 is: %i"), GetValidWords(Words).Num() - 1);
 }
 
 void UBullCowCartridge::OnInput(const FString &PlayerInput) // When the player hits enter
@@ -39,11 +35,10 @@ void UBullCowCartridge::InitGame()
     Lives = HiddenWord.Len();
     bGameOver = false;
 
-    PrintLine(TEXT("The hidden word is: %s"), *HiddenWord); // debug line
-
     // Welcome Player
     PrintLine(TEXT("Welcome to Bull Cows!"));
     PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
+    PrintLine(TEXT("The hidden word is: %s"), *HiddenWord); // debug line
     PrintLine(TEXT("You have %i attempts!"), Lives);
     PrintLine(TEXT("Type in your guess! \nPress ENTER to continue..."));
 }
@@ -106,6 +101,11 @@ void UBullCowCartridge::ProcessGuess(const FString &Guess)
         return;
     }
 
+    // show player bull and cows
+    FBullCowCount Score = GetBullCows(Guess);
+
+    PrintLine(TEXT("You have %i Bulls and %i Cows."), Score.Bulls, Score.Cows);
+
     PrintLine(TEXT("Guess again, you have %i lives left"), Lives);
 }
 
@@ -123,4 +123,31 @@ TArray<FString> UBullCowCartridge::GetValidWords(const TArray<FString> &WordList
     }
 
     return ValidWords;
+}
+
+FBullCowCount UBullCowCartridge::GetBullCows(const FString &Guess) const
+{
+    FBullCowCount Count;
+
+    // for every index of guess is same as index hidden, bullCount++
+    // if not a bull was it cow? if yes CowCount++
+
+    for (int32 GuessIndex = 0; GuessIndex < Guess.Len(); GuessIndex++)
+    {
+        if (Guess[GuessIndex] == HiddenWord[GuessIndex])
+        {
+            Count.Bulls++;
+            continue;
+        }
+
+        for (int32 HiddenIndex = 0; HiddenIndex < HiddenWord.Len(); HiddenIndex++)
+        {
+            if (Guess[GuessIndex] == HiddenWord[HiddenIndex])
+            {
+                Count.Cows++;
+                break;
+            }
+        }
+    }
+    return Count;
 }
