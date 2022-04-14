@@ -50,6 +50,13 @@ void UBullCowCartridge::EndGame()
 
 bool UBullCowCartridge::IsIsogram(FString Word) const
 {
+    for (int32 Index = 0, Comparison = Index + 1; Comparison < Word.Len(); Comparison++)
+    {
+        if (Word[Index] == Word[Comparison])
+        {
+            return false;
+                }
+    }
     return true;
 }
 
@@ -89,6 +96,5 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
         return;
     }
 
-    // show player bulls and cows
     PrintLine(TEXT("Guess again, you have %i lives left"), Lives);
 }
