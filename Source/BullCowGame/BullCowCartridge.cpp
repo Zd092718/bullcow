@@ -4,7 +4,6 @@
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
-
     // provides access to word list
     const FString WordListPath = FPaths::ProjectContentDir() / TEXT("WordLists/HiddenWordList.txt");
     FFileHelper::LoadFileToStringArray(Words, *WordListPath);
@@ -14,6 +13,8 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 
     PrintLine(TEXT("The number of valid words is: %i."), GetValidWords(Words).Num());
     PrintLine(TEXT("The number of possible words is %i"), Words.Num());
+    PrintLine(TEXT("Valid words - 1 is: %i"), GetValidWords(Words).Num() - 1);
+    PrintLine(TEXT("The hidden word is: %s"), *HiddenWord);
 }
 
 void UBullCowCartridge::OnInput(const FString &PlayerInput) // When the player hits enter
@@ -32,10 +33,9 @@ void UBullCowCartridge::OnInput(const FString &PlayerInput) // When the player h
 // Starts Game
 void UBullCowCartridge::InitGame()
 {
-    HiddenWord = TEXT("cakes");
+    HiddenWord = GetValidWords(Words)[FMath::RandRange(0, GetValidWords(Words).Num() - 1)];
     Lives = HiddenWord.Len();
     bGameOver = false;
-    PrintLine(TEXT("The hidden word is: %s"), *HiddenWord);
 
     // Welcome Player
     PrintLine(TEXT("Welcome to Bull Cows!"));
