@@ -4,11 +4,15 @@
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
+
+    // provides access to word list
     const FString WordListPath = FPaths::ProjectContentDir() / TEXT("WordLists/HiddenWordList.txt");
     FFileHelper::LoadFileToStringArray(Words, *WordListPath);
 
+    GetValidWords(Words);
     InitGame(); // setting up game
 
+    PrintLine(TEXT("The number of valid words is: %i."), GetValidWords(Words).Num());
     PrintLine(TEXT("The number of possible words is %i"), Words.Num());
 }
 
@@ -99,4 +103,20 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
     }
 
     PrintLine(TEXT("Guess again, you have %i lives left"), Lives);
+}
+
+TArray<FString> UBullCowCartridge::GetValidWords(TArray<FString> WordList) const
+{
+    TArray<FString> ValidWords;
+
+    for (int32 i = 0; i < WordList.Num(); i++)
+    {
+        if (WordList[i].Len() >= 4 && WordList[i].Len() <= 8 && IsIsogram(WordList[i]))
+        {
+            ValidWords.Emplace(WordList[i]);
+            // PrintLine(TEXT("%s"), *Words[i]);
+        }
+    }
+
+    return ValidWords;
 }
